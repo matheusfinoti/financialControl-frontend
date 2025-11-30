@@ -9,7 +9,7 @@ import { environment } from '../config/environment';
 })
 export class CategoryService {
   // URL base da sua API de categorias
-  private apiUrl = '${environment.apiUrl}/category';
+  private apiUrl = `${environment.apiUrl}/category`;
 
   constructor(private http: HttpClient) {}
 

@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CategoryListComponent } from './category-list/category-list';
+import { CategoryListComponent } from './components/category-list/category-list';
 import { CommonModule } from '@angular/common';
+import { TransactionListComponent } from './components/transaction-list/transaction-list';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CategoryListComponent, CommonModule], // IMPORTANTE: CommonModule para *ngFor, RouterOutlet para rotas
+  imports: [RouterOutlet, CategoryListComponent, CommonModule, TransactionListComponent], // IMPORTANTE: CommonModule para *ngFor, RouterOutlet para rotas
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

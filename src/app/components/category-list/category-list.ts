@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../services/category-service';
-import { CategoryDto } from '../models/category.model';
+import { CategoryService } from '../../services/category-service';
+import { CategoryDto } from '../../models/category.model';
 import { CommonModule } from '@angular/common';
 
 @Component({

@@ -1,0 +1,37 @@
+<h2>Transações Recentes</h2>
+
+<!-- Loading -->
+<div *ngIf="!vwTransactions.length">
+  Carregando transações...
+</div>
+
+<!-- Tabela -->
+<table *ngIf="vwTransactions.length" border="1" width="100%" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Descrição</th>
+      <th>Categoria</th>
+      <th>Método de Pagamento</th>
+      <th>Valor</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of vwTransactions">
+      <td>{{ t.transactionDate | date:'dd/MM/yyyy' }}</td>
+      <td>{{ t.transactionDescription }}</td>
+      <td>{{ t.categoryName }}</td>
+      <td>{{ t.paymentMethod }}</td>
+      <td>{{ t.transactionValue | currency:'BRL' }}</td>
+      <td>
+        <h2>AI</h2>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Caso não haja registros -->
+<div *ngIf="vwTransactions.length === 0">
+  Nenhuma transação encontrada.
+</div>
