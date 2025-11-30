@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category-service';
 import { CategoryDto } from '../models/category.model';
-import { CommonModule } from '@angular/common'; // <- Import necessário
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-category-list',
-  standalone: true, 
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule], // necessário para *ngFor
   templateUrl: './category-list.html',
-  styleUrl: './category-list.css'
+  styleUrls: ['./category-list.css']
 })
 export class CategoryListComponent implements OnInit {
 
@@ -27,4 +27,3 @@ export class CategoryListComponent implements OnInit {
     });
   }
 }
-
