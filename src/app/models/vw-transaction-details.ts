@@ -1,4 +1,4 @@
-export interface VwTransactionDetails {
+export interface VwTransactionDetailsDto {
   categoryName: string;
   paymentMethod: string;
   id: number;

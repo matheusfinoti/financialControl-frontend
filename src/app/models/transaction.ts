@@ -1,4 +1,4 @@
-export interface Transaction {
+export interface TransactionDto {
   id: number;
   transactionDate: string;       // datas vêm como string no JSON
   transactionValue: number;

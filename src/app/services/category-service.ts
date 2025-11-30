@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CategoryDto } from '../models/category.model';
+import { environment } from '../config/environment';
 
 @Injectable({
   providedIn: 'root' // Faz o Angular criar um singleton global do serviço
 })
 export class CategoryService {
   // URL base da sua API de categorias
-  private apiUrl = 'https://localhost:7271/api/category';
+  private apiUrl = '${environment.apiUrl}/category';
 
   constructor(private http: HttpClient) {}
 
