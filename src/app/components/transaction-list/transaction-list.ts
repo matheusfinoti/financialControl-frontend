@@ -64,7 +64,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   editTransaction(transaction: VwTransactionDetailsDto): void {
-    console.log(transaction);
+    console.log(transaction); 
   }
 
   deleteTransaction(transaction: VwTransactionDetailsDto): void {
