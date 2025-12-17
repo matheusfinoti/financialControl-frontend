@@ -1,5 +1,12 @@
 <h2>Transações</h2>
 
+<input
+  type="text"
+  placeholder="Filtrar por descrição"
+  [(ngModel)]="filterText"
+  (input)="applyFilter()"
+/>
+
 <!-- 1️⃣ LOADING -->
 <div *ngIf="isLoading">
   Carregando transações...
@@ -31,9 +38,9 @@
       <td>{{ t.paymentMethod }}</td>
       <td>{{ t.transactionValue | currency:'BRL' }}</td>
       <td>
-        <button>Ver</button>
-        <button>Editar</button>
-        <button>Excluir</button>
+        <button (click)="viewTransaction(t)">Ver</button>
+        <button (click)="editTransaction(t)">Editar</button>
+        <button (click)="deleteTransaction(t)">Excluir</button>
       </td>
     </tr>
   </tbody>
