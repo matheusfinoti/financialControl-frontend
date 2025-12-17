@@ -5,6 +5,7 @@ import { TransactionService } from '../../services/transaction-service';
 import { VwTransactionDetailsService } from '../../services/vw-transaction-details-service';
 import { VwTransactionDetailsDto } from '../../models/vw-transaction-details';
 import { FormsModule } from '@angular/forms';
+import { error } from 'console';
 
 @Component({
   selector: 'app-transaction-list',
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./transaction-list.css']
 })
 export class TransactionListComponent implements OnInit {
-  
+
+
   transactions: VwTransactionDetailsDto[] = [];
   filteredTransactions: VwTransactionDetailsDto[] = [];
 
@@ -23,8 +25,9 @@ export class TransactionListComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private vwTransactionService: VwTransactionDetailsService
-  ) {}
+    private vwTransactionService: VwTransactionDetailsService,
+    private transactionService: TransactionService
+  ) { }
 
   ngOnInit(): void {
     this.loadTransactions();
@@ -48,10 +51,10 @@ export class TransactionListComponent implements OnInit {
     });
   }
 
-  applyFilter() : void {
+  applyFilter(): void {
     const text = this.filterText.toLowerCase();
 
-    this.filteredTransactions = this.transactions.filter(t => 
+    this.filteredTransactions = this.transactions.filter(t =>
       t.transactionDescription.toLowerCase().includes(text)
     );
   }
@@ -66,6 +69,20 @@ export class TransactionListComponent implements OnInit {
 
   deleteTransaction(transaction: VwTransactionDetailsDto): void {
     console.log(transaction);
+
+    if (!confirm(`Deseja realmente excluir a transação "${transaction.transactionDescription}"?`)) {
+      return;
+    }
+    this.transactionService.delete(transaction.id).subscribe({
+      next: () => {
+        this.transactions = this.transactions.filter(t => t.id !== transaction.id);
+        this.filteredTransactions = this.filteredTransactions.filter(t => t.id !== transaction.id);
+      },
+      error: (err) => {
+        console.error(err)
+        alert('Erro');
+      }
+    });
   }
 
 }
