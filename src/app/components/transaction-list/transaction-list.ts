@@ -14,19 +14,34 @@ import { VwTransactionDetailsDto } from '../../models/vw-transaction-details';
 })
 export class TransactionListComponent implements OnInit {
   
-  transactions: TransactionDto[] = [];
-  vwTransactions: VwTransactionDetailsDto[] = [];
+  transactions: VwTransactionDetailsDto[] = [];
+  filteredTransactions: VwTransactionDetailsDto[] = [];
 
-  constructor(private transactionService: TransactionService, private vwTransactionService: VwTransactionDetailsService) {}
+  isLoading = false;
+  errorMessage = '';
+
+  constructor(
+    private vwTransactionService: VwTransactionDetailsService
+  ) {}
 
   ngOnInit(): void {
     this.loadTransactions();
   }
 
   loadTransactions(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+
     this.vwTransactionService.getAll().subscribe({
-      next: (data) => this.vwTransactions = data,
-      error: (err) => console.error('Erro ao carregar transactions', err)
+      next: (data) => {
+        this.transactions = data;
+        this.filteredTransactions = data;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.errorMessage = 'Erro ao carregar transações';
+        this.isLoading = false;
+      }
     });
   }
 

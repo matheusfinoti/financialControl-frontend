@@ -7,7 +7,7 @@ import { TransactionListComponent } from './components/transaction-list/transact
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CategoryListComponent, CommonModule, TransactionListComponent], // IMPORTANTE: CommonModule para *ngFor, RouterOutlet para rotas
+  imports: [RouterOutlet, CommonModule], // IMPORTANTE: CommonModule para *ngFor, RouterOutlet para rotas
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
