@@ -1,1 +1,72 @@
-<p>transaction-edit works!</p>
+<h2>Editar Transação</h2>
+
+<!-- LOADING -->
+<div *ngIf="isLoading">
+  <p>Carregando transação...</p>
+</div>
+
+<!-- ERRO -->
+<div *ngIf="errorMessage && !isLoading" class="error">
+  {{ errorMessage }}
+</div>
+
+<!-- FORMULÁRIO -->
+<form *ngIf="!isLoading && !errorMessage" (ngSubmit)="saveTransaction()">
+
+  <div>
+    <label>Descrição</label><br />
+    <input
+      type="text"
+      [(ngModel)]="transaction.transactionDescription"
+      name="description"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Data</label><br />
+    <input
+      type="date"
+      [(ngModel)]="transaction.transactionDate"
+      name="date"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Categoria (ID)</label><br />
+    <input
+      type="number"
+      [(ngModel)]="transaction.transactionIdCategory"
+      name="category"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Forma de Pagamento (ID)</label><br />
+    <input
+      type="number"
+      [(ngModel)]="transaction.transactionIdPaymentMethod"
+      name="payment"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Valor</label><br />
+    <input
+      type="number"
+      step="0.01"
+      [(ngModel)]="transaction.transactionValue"
+      name="value"
+      required
+    />
+  </div>
+
+  <br />
+
+  <button type="submit">Salvar</button>
+  <button type="button" (click)="cancel()">Cancelar</button>
+
+</form>

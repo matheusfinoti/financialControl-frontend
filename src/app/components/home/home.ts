@@ -5,7 +5,7 @@ import { TransactionListComponent } from '../transaction-list/transaction-list';
 
 @Component({
   selector: 'app-home',
-  imports: [CategoryListComponent, CommonModule, TransactionListComponent],
+  imports: [ CommonModule, TransactionListComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

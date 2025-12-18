@@ -10,18 +10,28 @@ import { TransactionDto } from '../models/transaction';
 export class TransactionService {
   private apiUrl = `${environment.apiUrl}/transaction`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<TransactionDto[]> {
     return this.http.get<TransactionDto[]>(this.apiUrl);
   }
 
+  getById(id: number): Observable<TransactionDto> {
+    return this.http.get<TransactionDto>(`${this.apiUrl}/${id}`);
+  }
+
   create(transaction: TransactionDto): Observable<TransactionDto> {
-    return this.http.post<TransactionDto>(this.apiUrl, transaction)
+    return this.http.post<TransactionDto>(
+      this.apiUrl,
+      transaction
+    )
   }
 
   update(transaction: TransactionDto): Observable<TransactionDto> {
-    return this.http.put<TransactionDto>('${this.apiUrl}/${transaction.id}', transaction)
+    return this.http.put<TransactionDto>(
+      `${this.apiUrl}/${transaction.id}`,
+      transaction
+    );
   }
 
   delete(id: number): Observable<void> {
