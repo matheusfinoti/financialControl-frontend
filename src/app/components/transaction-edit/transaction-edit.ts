@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from '../../services/transaction-service';
 import { TransactionDto } from '../../models/transaction';
@@ -17,6 +17,9 @@ import { PaymentMethodDto } from '../../models/payment-method.model';
   styleUrls: ['./transaction-edit.css']
 })
 export class TransactionEditComponent implements OnInit {
+  @Input() transactionId!: number;
+  @Output() close = new EventEmitter<void>();
+  @Output() saved = new EventEmitter<void>();
 
   transaction: TransactionDto = {} as TransactionDto;
   categories: CategoryDto[] = [];
@@ -25,29 +28,25 @@ export class TransactionEditComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private route: ActivatedRoute,
-    public router: Router,
     private transactionService: TransactionService,
     private categoryService: CategoryService,
     private paymentMethodService: PaymentMethodService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (!id) {
+    if (!this.transactionId) {
       this.errorMessage = 'ID inválido!';
       return;
     }
 
-    this.loadTransaction(id);
+    this.loadTransaction();
     this.loadCategories();
     this.loadPaymentMethods();
   }
 
-  loadTransaction(id: number): void {
+  loadTransaction(): void {
     this.isLoading = true;
-    this.transactionService.getById(id).subscribe({
+    this.transactionService.getById(this.transactionId).subscribe({
       next: (data) => {
         this.transaction = data;
         this.isLoading = false;
@@ -64,7 +63,9 @@ export class TransactionEditComponent implements OnInit {
     this.transactionService.update(this.transaction).subscribe({
       next: () => {
         alert('Transação atualizada com sucesso');
-        this.router.navigate(['/']); // volta para lista
+        this.transactionService.update(this.transaction).subscribe(() => {
+          this.saved.emit(); // avisa o pai
+        });
       },
       error: (err) => {
         console.error(err);
@@ -74,7 +75,7 @@ export class TransactionEditComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/']);
+    this.close.emit();
   }
 
   loadPaymentMethods() {
@@ -83,7 +84,7 @@ export class TransactionEditComponent implements OnInit {
       error: err => console.error(err)
     });
   }
-  
+
   loadCategories() {
     this.categoryService.getAll().subscribe({
       next: (data) => this.categories = data,

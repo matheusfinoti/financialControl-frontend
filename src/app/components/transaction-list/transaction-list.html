@@ -38,7 +38,6 @@
       <td>{{ t.paymentMethod }}</td>
       <td>{{ t.transactionValue | currency:'BRL' }}</td>
       <td>
-        <button (click)="viewTransaction(t)">Ver</button>
         <button (click)="editTransaction(t)">Editar</button>
         <button (click)="deleteTransaction(t)">Excluir</button>
       </td>
