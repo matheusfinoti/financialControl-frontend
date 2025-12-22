@@ -45,6 +45,16 @@
   </tbody>
 </table>
 
+<div *ngIf="isEditModalOpen" class="modal-backdrop">
+  <div class="modal-content">
+    <app-transaction-edit
+      [transactionId]="selectedTransactionId!"
+      (close)="closeEditModal()"
+      (saved)="onTransactionSaved()">
+    </app-transaction-edit>
+  </div>
+</div>
+
 <!-- 4️⃣ LISTA VAZIA -->
 <div *ngIf="!isLoading && !filteredTransactions.length">
   Nenhuma transação encontrada.

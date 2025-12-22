@@ -6,17 +6,19 @@ import { VwTransactionDetailsService } from '../../services/vw-transaction-detai
 import { VwTransactionDetailsDto } from '../../models/vw-transaction-details';
 import { FormsModule } from '@angular/forms';
 import { error } from 'console';
+import { TransactionEditComponent } from '../transaction-edit/transaction-edit';
 
 @Component({
   selector: 'app-transaction-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TransactionEditComponent],
   templateUrl: './transaction-list.html',
   styleUrls: ['./transaction-list.css']
 })
 export class TransactionListComponent implements OnInit {
 
-
+  isEditModalOpen = false;
+  selectedTransactionId: number | null = null;
   transactions: VwTransactionDetailsDto[] = [];
   filteredTransactions: VwTransactionDetailsDto[] = [];
 
@@ -34,6 +36,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   loadTransactions(): void {
+    this.isEditModalOpen = false;
     this.isLoading = true;
     this.errorMessage = '';
 
@@ -65,7 +68,8 @@ export class TransactionListComponent implements OnInit {
 
   editTransaction(transaction: VwTransactionDetailsDto): void {
     console.log(transaction);
-    
+    this.selectedTransactionId = transaction.id;
+    this.isEditModalOpen = true;
     // this.transactionService.update();
   }
 
@@ -87,4 +91,13 @@ export class TransactionListComponent implements OnInit {
     });
   }
 
+  closeEditModal(): void {
+    this.selectedTransactionId = null;
+    this.isEditModalOpen = false;
+  }
+
+  onTransactionSaved(): void {
+    this.closeEditModal();
+    this.loadTransactions();
+  }
 }
