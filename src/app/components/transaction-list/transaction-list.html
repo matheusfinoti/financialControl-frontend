@@ -1,11 +1,7 @@
-<h2>Transações</h2>
+<h2 style="display: inline-block;">Transações</h2>
+<button (click)="openCreateModal()">Novo gasto</button>
 
-<input
-  type="text"
-  placeholder="Filtrar por descrição"
-  [(ngModel)]="filterText"
-  (input)="applyFilter()"
-/>
+<input style="display: block;" type="text" placeholder="Filtrar por descrição" [(ngModel)]="filterText" (input)="applyFilter()" />
 
 <!-- 1️⃣ LOADING -->
 <div *ngIf="isLoading">
@@ -47,11 +43,15 @@
 
 <div *ngIf="isEditModalOpen" class="modal-backdrop">
   <div class="modal-content">
-    <app-transaction-edit
-      [transactionId]="selectedTransactionId!"
-      (close)="closeEditModal()"
+    <app-transaction-edit [transactionId]="selectedTransactionId!" (close)="closeModal()"
       (saved)="onTransactionSaved()">
     </app-transaction-edit>
+  </div>
+</div>
+
+<div *ngIf="isCreateModalOpen" class="modal-backdrop">
+  <div class="modal-content">
+    <app-transaction-create (close)="closeModal()" (saved)="onTransactionSaved()"/>
   </div>
 </div>
 
