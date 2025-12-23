@@ -1,7 +1,9 @@
 <h2 style="display: inline-block;">Transações</h2>
 <button (click)="openCreateModal()">Novo gasto</button>
+<button (click)="openCategoryModal()">Nova Categoria</button>
 
-<input style="display: block;" type="text" placeholder="Filtrar por descrição" [(ngModel)]="filterText" (input)="applyFilter()" />
+<input style="display: block;" type="text" placeholder="Filtrar por descrição" [(ngModel)]="filterText"
+  (input)="applyFilter()" />
 
 <!-- 1️⃣ LOADING -->
 <div *ngIf="isLoading">
@@ -44,16 +46,23 @@
 <div *ngIf="isEditModalOpen" class="modal-backdrop">
   <div class="modal-content">
     <app-transaction-edit [transactionId]="selectedTransactionId!" (close)="closeModal()"
-      (saved)="onTransactionSaved()">
+      (saved)="onSaved()">
     </app-transaction-edit>
   </div>
 </div>
 
 <div *ngIf="isCreateModalOpen" class="modal-backdrop">
   <div class="modal-content">
-    <app-transaction-create (close)="closeModal()" (saved)="onTransactionSaved()"/>
+    <app-transaction-create (close)="closeModal()" (saved)="onSaved()" />
   </div>
 </div>
+
+<div *ngIf="isCreateCategoryModalOpen" class="modal-backdrop">
+  <div class="modal-content">
+    <app-category-create (close)="closeModal()" (saved)="onSaved()" />
+  </div>
+</div>
+
 
 <!-- 4️⃣ LISTA VAZIA -->
 <div *ngIf="!isLoading && !filteredTransactions.length">

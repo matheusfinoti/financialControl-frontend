@@ -8,11 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { error } from 'console';
 import { TransactionEditComponent } from '../transaction-edit/transaction-edit';
 import { TransactionCreateComponent } from '../transaction-create/transaction-create';
+import { CategoryCreateComponent } from '../category-create/category-create';
 
 @Component({
   selector: 'app-transaction-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, TransactionEditComponent, TransactionCreateComponent],
+  imports: [CommonModule, FormsModule, TransactionEditComponent, TransactionCreateComponent, CategoryCreateComponent],
   templateUrl: './transaction-list.html',
   styleUrls: ['./transaction-list.css']
 })
@@ -20,6 +21,7 @@ export class TransactionListComponent implements OnInit {
 
   isEditModalOpen = false;
   isCreateModalOpen = false;
+  isCreateCategoryModalOpen = false;
   selectedTransactionId: number | null = null;
   transactions: VwTransactionDetailsDto[] = [];
   filteredTransactions: VwTransactionDetailsDto[] = [];
@@ -97,14 +99,19 @@ export class TransactionListComponent implements OnInit {
     this.selectedTransactionId = null;
     this.isEditModalOpen = false;
     this.isCreateModalOpen = false;
+    this.isCreateCategoryModalOpen = false;
   }
 
-  onTransactionSaved(): void {
+  onSaved(): void {
     this.closeModal();
     this.loadTransactions();
   }
 
   openCreateModal(): void {
     this.isCreateModalOpen = true;
+  }
+
+  openCategoryModal(): void {
+    this.isCreateCategoryModalOpen = true;
   }
 }

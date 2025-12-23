@@ -1,0 +1,12 @@
+<h2>Nova Categoria</h2>
+
+<form (ngSubmit)="saveCategory()">
+    <div>
+        <label for="categoryName"></label>
+        <input type="text" id="categoryName" [(ngModel)]="category.categoryName" name="categoryName" required>
+    </div>
+    <div>
+        <button type="submit">Salvar</button>
+        <button type="button" (click)="cancel()">Cancelar</button>
+    </div>
+</form>
