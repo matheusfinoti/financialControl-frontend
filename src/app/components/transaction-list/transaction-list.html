@@ -1,6 +1,7 @@
-<h2 style="display: inline-block;">Transações</h2>
+<h2>Transações</h2>
 <button (click)="openCreateModal()">Novo gasto</button>
-<button (click)="openCategoryModal()">Nova Categoria</button>
+<button (click)="openCategoryModal()">Nova categoria</button>
+<button (click)="openPaymentMethodModal()">Novo método pgto</button>
 
 <input style="display: block;" type="text" placeholder="Filtrar por descrição" [(ngModel)]="filterText"
   (input)="applyFilter()" />
@@ -57,7 +58,7 @@
   </div>
 </div>
 
-<div *ngIf="isCreateCategoryModalOpen" class="modal-backdrop">
+<div *ngIf="isCreatePaymentMethodModalOpen" class="modal-backdrop">
   <div class="modal-content">
     <app-category-create (close)="closeModal()" (saved)="onSaved()" />
   </div>

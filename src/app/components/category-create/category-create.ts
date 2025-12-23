@@ -28,6 +28,7 @@ export class CategoryCreateComponent {
       }, error: (err) => {
         console.error(err);
         alert('Erro ao salvar;');
+        this.cancel();
       }
     })
   }

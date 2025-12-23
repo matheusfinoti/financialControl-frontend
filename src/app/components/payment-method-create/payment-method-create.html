@@ -1,0 +1,12 @@
+<h2>Novo método de pagamento</h2>
+
+<form (ngSubmit)="savePaymentMethod()">
+    <div>
+        <label for="paymentMethodl">Método</label>
+        <input type="text" id="paymentMethodl" [(ngModel)]="paymentMethod.paymentMethodl" name="paymentMethodl" required>
+    </div>
+    <div>
+        <button type="submit">Salvar</button>
+        <button type="button" (click)="cancel()">Cancelar</button>
+    </div>
+</form>

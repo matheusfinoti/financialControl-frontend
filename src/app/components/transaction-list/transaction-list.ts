@@ -9,11 +9,12 @@ import { error } from 'console';
 import { TransactionEditComponent } from '../transaction-edit/transaction-edit';
 import { TransactionCreateComponent } from '../transaction-create/transaction-create';
 import { CategoryCreateComponent } from '../category-create/category-create';
+import { PaymentMethodCreateComponent } from '../payment-method-create/payment-method-create';
 
 @Component({
   selector: 'app-transaction-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, TransactionEditComponent, TransactionCreateComponent, CategoryCreateComponent],
+  imports: [CommonModule, FormsModule, TransactionEditComponent, TransactionCreateComponent, CategoryCreateComponent, PaymentMethodCreateComponent],
   templateUrl: './transaction-list.html',
   styleUrls: ['./transaction-list.css']
 })
@@ -22,6 +23,7 @@ export class TransactionListComponent implements OnInit {
   isEditModalOpen = false;
   isCreateModalOpen = false;
   isCreateCategoryModalOpen = false;
+  isCreatePaymentMethodModalOpen = false;
   selectedTransactionId: number | null = null;
   transactions: VwTransactionDetailsDto[] = [];
   filteredTransactions: VwTransactionDetailsDto[] = [];
@@ -74,7 +76,6 @@ export class TransactionListComponent implements OnInit {
     console.log(transaction);
     this.selectedTransactionId = transaction.id;
     this.isEditModalOpen = true;
-    // this.transactionService.update();
   }
 
   deleteTransaction(transaction: VwTransactionDetailsDto): void {
@@ -100,6 +101,7 @@ export class TransactionListComponent implements OnInit {
     this.isEditModalOpen = false;
     this.isCreateModalOpen = false;
     this.isCreateCategoryModalOpen = false;
+    this.isCreatePaymentMethodModalOpen = false;
   }
 
   onSaved(): void {
@@ -113,5 +115,9 @@ export class TransactionListComponent implements OnInit {
 
   openCategoryModal(): void {
     this.isCreateCategoryModalOpen = true;
+  }
+
+  openPaymentMethodModal(): void {
+    this.isCreatePaymentMethodModalOpen = true;
   }
 }
