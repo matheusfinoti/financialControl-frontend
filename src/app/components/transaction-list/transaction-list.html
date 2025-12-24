@@ -58,12 +58,17 @@
   </div>
 </div>
 
-<div *ngIf="isCreatePaymentMethodModalOpen" class="modal-backdrop">
+<div *ngIf="isCreateCategoryModalOpen" class="modal-backdrop">
   <div class="modal-content">
     <app-category-create (close)="closeModal()" (saved)="onSaved()" />
   </div>
 </div>
 
+<div *ngIf="isCreatePaymentMethodModalOpen" class="modal-backdrop">
+  <div class="modal-content">
+    <app-payment-method-create (close)="closeModal()" (saved)="onSaved()" />
+  </div>
+</div>
 
 <!-- 4️⃣ LISTA VAZIA -->
 <div *ngIf="!isLoading && !filteredTransactions.length">

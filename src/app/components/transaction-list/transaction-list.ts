@@ -42,7 +42,6 @@ export class TransactionListComponent implements OnInit {
   }
 
   loadTransactions(): void {
-    this.isEditModalOpen = false;
     this.isLoading = true;
     this.errorMessage = '';
 
