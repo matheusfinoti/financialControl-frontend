@@ -1,3 +1,9 @@
+.table {
+  --bs-table-bg: #f8f9fa00;
+  --bs-table-striped-bg: rgba(0, 0, 0, 0.03);
+  --bs-table-hover-bg: rgba(0, 0, 0, 0.06);
+}
+
 .modal-backdrop {
   position: fixed;
   top: 0;

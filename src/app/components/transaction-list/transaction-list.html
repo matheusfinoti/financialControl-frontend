@@ -1,9 +1,9 @@
-<h2>Transações</h2>
-<button (click)="openCreateModal()">Novo gasto</button>
-<button (click)="openCategoryModal()">Nova categoria</button>
-<button (click)="openPaymentMethodModal()">Novo método pgto</button>
+<h2 class="mx-2">Transações</h2>
+<button class="btn btn-primary mx-1" (click)="openCreateModal()">Novo gasto</button>
+<button class="btn btn-primary mx-1" (click)="openCategoryModal()">Nova categoria</button>
+<button class="btn btn-primary mx-1" (click)="openPaymentMethodModal()">Novo método pgto</button>
 
-<input style="display: block;" type="text" placeholder="Filtrar por descrição" [(ngModel)]="filterText"
+<input class="form-control mx-1 my-2" style="display: block;" type="text" placeholder="Filtrar por descrição" [(ngModel)]="filterText"
   (input)="applyFilter()" />
 
 <!-- 1️⃣ LOADING -->
@@ -17,15 +17,15 @@
 </div>
 
 <!-- 3️⃣ TABELA -->
-<table *ngIf="!isLoading && filteredTransactions.length">
+<table class="table m-1" *ngIf="!isLoading && filteredTransactions.length">
   <thead>
     <tr>
-      <th>Data</th>
-      <th>Descrição</th>
-      <th>Categoria</th>
-      <th>Pagamento</th>
-      <th>Valor</th>
-      <th>Ações</th>
+      <th scope="col">Data</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Pagamento</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Ações</th>
     </tr>
   </thead>
 
@@ -37,8 +37,8 @@
       <td>{{ t.paymentMethod }}</td>
       <td>{{ t.transactionValue | currency:'BRL' }}</td>
       <td>
-        <button (click)="editTransaction(t)">Editar</button>
-        <button (click)="deleteTransaction(t)">Excluir</button>
+        <button class="btn btn-primary mx-2" (click)="editTransaction(t)">Editar</button>
+        <button class="btn btn-danger mx-2" (click)="deleteTransaction(t)">Excluir</button>
       </td>
     </tr>
   </tbody>
